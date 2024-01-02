@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+void input(int n, int quant[], double price[]) {
+    if (n > 0) {
+        scanf("%d", &quant[n - 1]);
+        scanf("%lf", &price[n - 1]);
+        input(n - 1, quant, price);
+    }
+}
+
+double totalgasto(int n, int quant[], double price[], double arvore) {
+    if (n == 0) {
+        return arvore;
+    }
+
+    return totalgasto(n - 1, quant, price, arvore) + quant[n - 1] * price[n - 1];
+}
+
+double calcdototal(double total) {
+    return total / 21;
+}
+
+int main() {
+    double arvore;
+    int quant_enf[3];
+    double prec_enf[3];
+    double total, porfunc;
+
+    scanf("%lf", &arvore);
+
+    input(3, quant_enf, prec_enf);
+
+    total = totalgasto(3, quant_enf, prec_enf, arvore);
+
+    porfunc = calcdototal(total);
+
+    printf("%.2lf\n", total);
+    printf("%.2lf\n", porfunc);
+
+    return 0;
+}
