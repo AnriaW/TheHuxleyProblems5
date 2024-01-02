@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+void input(double difi[], int num, double preco, int cont2, int cont1)
+{
+    if (cont1 == 3)
+    {
+        printf("Jogo[%d] = R$%.2lf\n", cont2, preco);
+        return;
+    }
+    else
+    {
+        if (preco > 100.0)
+        {
+            preco = preco - (difi[num] * preco);
+        }
+        else if (preco < 100.0 && preco > 45.0)
+        {
+            preco = preco - ((difi[num] * preco) / 2.0);
+
+            if (preco < 45.0)
+            {
+                preco = 45.0;
+            }
+        }
+        else if (preco <= 45.0)
+        {
+            preco = preco;
+        }
+
+        input(difi, num, preco, cont2, cont1 + 1);
+    }
+}
+
+void read(int quant, int cont2, double difi[])
+{
+    int num;
+    double preco;
+
+    if (cont2 == quant)
+    {
+        return;
+    }
+    else
+    {
+        scanf("%d%lf", &num, &preco);
+
+        input(difi, num, preco, cont2, 0);
+
+        read(quant, cont2 + 1, difi);
+    }
+}
+
+int main()
+{
+    int quant;
+
+    double difi[] = {0.25, 0.20, 0.18, 0.15, 0.12, 0.10};
+
+    scanf("%d", &quant);
+
+    read(quant, 0, difi);
+
+    return 0;
+}
