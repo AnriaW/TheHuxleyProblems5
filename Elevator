@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+void passou(int vezes, int max, int *pas, int *into) {
+    if (vezes < 1) {
+        return;
+    }
+
+    int exit, enter;
+    
+    scanf("%d", &exit);
+    (*into) -= exit;
+    
+    scanf("%d", &enter);
+    (*into) += enter;
+
+    if (*into > max) {
+        (*pas)++;
+    }
+
+    passou(vezes - 1, max, pas, into);
+}
+
+int main() {
+    int read, cap_max;
+    int a = 0;
+    int b = 0;
+
+    scanf("%d %d", &read, &cap_max);
+    passou(read, cap_max, &a, &b);
+
+    if (a > 0) {
+        printf("S\n");
+    } else {
+        printf("N\n");
+    }
+
+    return 0;
+}
