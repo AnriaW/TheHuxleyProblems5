@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+void ordem(float *a, float *b, float *c, float *d) {
+    float temp;
+    if (*a > *c) {
+        temp = *a;
+        *a = *c;
+        *c = temp;
+    }
+    if (*b > *d) {
+        temp = *b;
+        *b = *d;
+        *d = temp;
+    }
+    if (*a > *b) {
+        temp = *a;
+        *a = *b;
+        *b = temp;
+    }
+    if (*c > *d) {
+        temp = *c;
+        *c = *d;
+        *d = temp;
+    }
+    if (*b > *c) {
+        temp = *b;
+        *b = *c;
+        *c = temp;
+    }
+}
+
+int main() {
+    float a, b, c, d;
+    scanf("%f %f %f %f", &a, &b, &c, &d);
+
+    ordem(&a, &b, &c, &d);
+
+    printf("%.2f\n%.2f\n%.2f\n%.2f\n", a, c, d, b);
+
+    return 0;
+}
