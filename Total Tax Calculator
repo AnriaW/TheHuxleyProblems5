@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+void calcula(double cota, double taxa, double produt, double frete)
+{
+    double valreal = produt * cota;
+    double valfreal = frete * cota;
+    double valtot = valreal + valfreal;
+    double import = valtot * 0.6;
+    double valfin = (valtot + import) / (1 - (taxa / 100));
+    double icms = valfin * (taxa / 100);
+    double total = import + icms;
+
+    if (produt < 2500)
+    {
+        printf("%.2lf\n%.2lf\n%.2lf\n%.2lf\n%.2lf\n%.2lf\n%.2lf\n%.2lf\nImpostos calculados com o frete\n", cota, valreal, valfreal, valtot, import, icms, total, valfin);
+    }
+    else
+    {
+        import = valreal * 0.6;
+        valfin = (valreal + import) / (1 - (taxa / 100));
+        icms = valfin * (taxa / 100);
+        total = import + icms;
+        printf("%.2lf\n%.2lf\n%.2lf\n%.2lf\n%.2lf\n%.2lf\n%.2lf\n%.2lf\nImpostos calculados sem o frete\n", cota, valreal, valfreal, valtot, import, icms, total, valfin + valfreal);
+    }
+}
+
+int main()
+{
+    double cota, taxa, produt, frete;
+
+    scanf("%lf%lf%lf%lf", &cota, &taxa, &produt, &frete);
+
+    calcula(cota, taxa, produt, frete);
+
+    return 0;
+}
