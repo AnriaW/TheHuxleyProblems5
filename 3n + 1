@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int calc(int n, int contag) {
+    if (n == 1) {
+        return contag;
+    } else if (n % 2 == 0) {
+        return calc(n / 2, contag + 1);
+    } else {
+        return calc((n * 3) + 1, contag + 1);
+    }
+}
+
+int ciclo_max(int i, int j, int tamax) {
+    if (i > j) {
+        return tamax;
+    } else {
+        int tam = calc(i, 1);
+        if (tam > tamax) {
+            tamax = tam;
+        }
+        return ciclo_max(i + 1, j, tamax);
+    }
+}
+
+void input() {
+    int i, j;
+    if (scanf("%d %d", &i, &j) != EOF) {
+        int ini = i;
+        int fim = j;
+
+        if (i > j) {
+            ini = j;
+            fim = i;
+        }
+
+        int res = ciclo_max(ini, fim, 0);
+
+        printf("%d %d %d\n", i, j, res);
+        input(); 
+    }
+}
+
+int main() {
+    input();
+    return 0;
+}
